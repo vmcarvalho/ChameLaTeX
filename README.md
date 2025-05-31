@@ -101,9 +101,8 @@ git checkout main
 "acmecorp acmecorp/JohnDoe_CV.pdf frontend"
 # create the branch, modify tex, commit
 git branch -b acmecorp
-vim summary.tex
-git add summary.tex
-git commit -m "Custom summary for AcmeCorp role"
+ sed -i '' 's/Seeking/Seeking a senior software developer role at Acme Corporations/g' objective.tex
+git commit -m "Custom objective for AcmeCorp role"
 git checkout main
 # build
 make
@@ -134,16 +133,17 @@ This uses git worktree to avoid disrupting your current working directory.
 ### Output Structure
 
 ```
-output_2024-01-15_14-30-25/
+output_2025-05-31_04-52-19/
 ├── JohnDoe_CV.pdf
 ├── public/
 │   └── JohnDoe_CV.pdf
+│   └── JohnDoe_CV_frontend.pdf
 ├── frontend/
 │   └── JohnDoe_CV.pdf
 └── acmecorp/
     └── JohnDoe_CV.pdf
 
-output -> output_2024-01-15_14-30-25/  # Symlink to latest
+output -> output_2025-05-31_04-52-19/  # Symlink to latest
 ```
 
 ## Advanced
@@ -179,7 +179,7 @@ output -> output_2024-01-15_14-30-25/  # Symlink to latest
 
 ### Debug Mode
 
-For verbose output, modify the pdflatex command in `build.sh`:
+For verbose output, make errors print in standard output in `build.sh`:
 ```bash
 pdflatex -interaction=nonstopmode main.tex  # Remove >/dev/null 2>&1
 ```
